@@ -1,5 +1,4 @@
 package Farmacia.app.remedios;
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -14,7 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Remedios {
 	
 	public Remedios(DadosCadastroRemedio dados) {
+		this.ativo=true;
 		this.nome=dados.nome();
 		this.via=dados.via();
 		this.lote=dados.lote();
@@ -35,13 +34,18 @@ public class Remedios {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+	
 	@Enumerated(EnumType.STRING)
 	private Via via;
+
 	private String lote;
-	private int quantidade;
+	private Integer quantidade;
 	private LocalDate validade;
+	
 	@Enumerated(EnumType.STRING)
 	private Laboratorio laboratorio;
+	private boolean ativo;
+	
 	public void atualizarInformacoes(@Valid DadosAtualizarRemedio dados) {
 		if(dados.nome() != null) {
 		this.nome = dados.nome();
@@ -54,6 +58,11 @@ public class Remedios {
 		if(dados.laboratorio() != null) {
 			this.laboratorio = dados.laboratorio();
 			}
+	}
+
+	public void inativar() {
+		this.ativo=false;
+		
 	}
 
 }
