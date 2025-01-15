@@ -92,6 +92,14 @@ public class RemediosController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	//Buscar remédios por Id
+	@GetMapping("/{id}")
+	public  ResponseEntity<DadosDetalhamentoRemedio> BuscarPorId(@PathVariable Long id) {
+		var remedio = remedioRepository.getReferenceById(id);
+
+		return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
+	}
+	
 	
 	
 		
