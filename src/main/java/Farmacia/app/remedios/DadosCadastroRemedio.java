@@ -11,14 +11,19 @@ public record DadosCadastroRemedio(
 		@NotNull
 		@NotBlank
 		String nome,
+		
 		@Enumerated
 		Via via,
+		
 		@NotBlank
 		String lote,
+		
 		@NotNull
 		int quantidade,
+		
 		@Future
 		LocalDate validade,
+		
 		@Enumerated
 		Laboratorio laboratorio) {
 
